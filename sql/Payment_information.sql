@@ -1,4 +1,5 @@
 -- This CTE finds what products use what payment type and what customers also use it
+
 with payment_information as (
 select
 payment_type,
