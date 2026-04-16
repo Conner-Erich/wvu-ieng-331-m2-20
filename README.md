@@ -2,19 +2,19 @@
 IENG_331_Milestone_2
 # Milestone 2: Python Pipeline
 
-**Team {number}**: {Name 1}, {Name 2}, {Name 3}
+**Team {20}**: {Conner Erich}
 
 ## How to Run
 
 Instructions to run the pipeline from a fresh clone:
 
 ```bash
-git clone https://github.com/{username}/wvu-ieng-331-m2-{team_number}.git
-cd wvu-ieng-331-m2-{team_number}
+git clone https://github.com/{Coner-Erich}/wvu-ieng-331-m2-{20}.git
+cd wvu-ieng-331-m2-{20}
 uv sync
 # place olist.duckdb in the data/ directory
-uv run wvu-ieng-331-m2-{team_number}
-uv run wvu-ieng-331-m2-{team_number} --start-date 2026-01-01 --seller-state SP
+uv run wvu-ieng-331-m2-{20}
+uv run wvu-ieng-331-m2-{20} --start-date 2026-01-01 --seller-state SP
 ```
 
 ## Parameters
