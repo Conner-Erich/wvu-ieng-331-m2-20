@@ -1,10 +1,10 @@
 [project]
 name = "wvu-ieng-331-m2-20"
 version = "0.1.0"
-description = "Add your description here"
+description = "runs sql queries that are located in the sql folder based on the data that is located in the data folder "
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [duckdb = ">=1.0"]
 
 [project.scripts]
 wvu-ieng-331-m2-20 = "wvu_ieng_331_m2_20:main"
