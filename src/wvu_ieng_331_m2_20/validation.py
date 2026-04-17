@@ -63,9 +63,6 @@ def check_tables_exist(conn: duckdb.DuckDBPyConnection) -> list[str]:
     return failures
 
 
-check_tables_exist(db_connect)
-
-
 def check_columns_not_null(conn: duckdb.DuckDBPyConnection) -> list[str]:
     """Check that key columns are not entirely NULL in their respective tables."""
     failures = []
@@ -82,9 +79,6 @@ def check_columns_not_null(conn: duckdb.DuckDBPyConnection) -> list[str]:
                     f"NULL check passed: '{table}.{column}' has {non_null_count:,} non-null rows."
                 )
     return failures
-
-
-check_columns_not_null(db_connect)
 
 
 def check_date_range(conn: duckdb.DuckDBPyConnection) -> list[str]:
@@ -127,9 +121,6 @@ def check_date_range(conn: duckdb.DuckDBPyConnection) -> list[str]:
     return failures
 
 
-check_date_range(db_connect)
-
-
 def check_row_counts(conn: duckdb.DuckDBPyConnection) -> list[str]:
     failures = []
     for table, minimum in MIN_ROW_COUNTS.items():
@@ -147,8 +138,6 @@ def check_row_counts(conn: duckdb.DuckDBPyConnection) -> list[str]:
             log.info(f"Row count check passed: '{table}' has {count:,} rows.")
     return failures
 
-
-check_row_counts(db_connect)
 
 if __name__ == "__main__":
     check_row_counts(db_connect)

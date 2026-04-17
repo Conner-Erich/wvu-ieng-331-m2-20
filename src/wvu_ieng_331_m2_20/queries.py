@@ -15,38 +15,55 @@ def data_path(filename: str) -> Path:
     return Path(__file__).parent.parent.parent / "data" / filename
 
 
-data_set_path = data_path(
-    "olist.duckdb"
-)  # uses the function to set olist.duckdb as the path
-
-
 def read_sql(filename: str) -> str:
-    """Read a .sql file and return its contents as a string."""
+    """Read a .sql file from SQL_DIR and return its contents as a string."""
     sql_path = SQL_PATH / filename
     if not sql_path.exists():
         raise FileNotFoundError(f"SQL file not found: {sql_path}")
     return sql_path.read_text(encoding="utf-8")
 
 
-conn_payment_info = duckdb.connect(data_set_path, read_only=True)
-get_payment_information = conn_payment_info.sql(
-    read_sql("Payment_information.sql"), params=[1]
-).pl()
+def get_payment_information(
+    conn: duckdb.DuckDBPyConnection,
+    payment_installment: int,
+) -> pl.DataFrame:
+    """Get payment information filtered by number of installments."""
+    return conn.sql(
+        read_sql("Payment_information.sql"),
+        params=[payment_installment],
+    ).pl()
 
-conn_price_shipping = duckdb.connect(data_set_path, read_only=True)
-get_price_shipping = conn_price_shipping.sql(
-    read_sql("Price_shipping.sql"), params=["cheap"]
-).pl()
 
-conn_product_reviews = duckdb.connect(data_set_path, read_only=True)
-get_product_reviews = conn_product_reviews.sql(
-    read_sql("Product_reviews.sql"), params=["poor"]
-).pl()
+def get_price_shipping(
+    conn: duckdb.DuckDBPyConnection,
+    seller_city: str,
+) -> pl.DataFrame:
+    """Get shipping price ratting ."""
+    return conn.sql(
+        read_sql("Price_shipping.sql"),
+        params=[seller_city],
+    ).pl()
 
-conn_seller_con_loc = duckdb.connect(data_set_path, read_only=True)
-get_seller_consumer_location = conn_seller_con_loc.sql(
-    read_sql("Seller_consumer_location.sql"), params=["alambari"]
-).pl()
+
+def get_product_reviews(
+    conn: duckdb.DuckDBPyConnection,
+    review_score: str,
+) -> pl.DataFrame:
+    """Get product reviews filtered by review score."""
+    return conn.sql(
+        read_sql("Product_reviews.sql"),
+        params=[review_score],
+    ).pl()
+
+
+def get_seller_consumer_location(
+    conn: duckdb.DuckDBPyConnection,
+    seller_city: str,
+) -> pl.DataFrame:
+    return conn.sql(
+        read_sql("seller_consumer_location.sql"),
+        params=[seller_city],
+    ).pl()
 
 
 if __name__ == "__main__":
