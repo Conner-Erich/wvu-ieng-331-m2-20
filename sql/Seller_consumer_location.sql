@@ -9,6 +9,7 @@ from
   JOIN orders AS o ON c.customer_id = o.customer_id
   JOIN order_items AS oi ON o.order_id = oi.order_id
   JOIN products AS p ON oi.product_id = p.product_id
+  where s.seller_city = $1
 group by
   s.seller_city,
   oi.product_id,

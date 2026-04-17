@@ -17,6 +17,7 @@ from
   join orders as o on ore.order_id = o.order_id
   join customers as c on c.customer_id = o.customer_id
   join order_payments as op on op.order_id = o.order_id
+  where review_rating = $1
 group by
   review_id,
   ore.order_id,
