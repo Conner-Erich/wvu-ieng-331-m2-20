@@ -5,8 +5,10 @@ description = "runs sql queries that are located in the sql folder based on the 
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+ "altair>=6.0.0",
  "duckdb>=1.0",
  "loguru>=0.7.3",
+ "pandas>=3.0.2",
  "polars>=1.39.3",
  "pyarrow>=23.0.1",
  "requests>=2.33.1",
