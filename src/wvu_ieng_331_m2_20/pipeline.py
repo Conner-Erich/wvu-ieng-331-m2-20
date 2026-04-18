@@ -150,18 +150,19 @@ def parse_args() -> argparse.Namespace:
         description="Olist database reporting.",
         epilog="Running with no arguments produces the preset data values.",
     )
-    parser.add_argument(
-        "--chart_limit",
-        type=int,
-        default=50,
-        help="Number of top products to show in the chart. (default: 50)",
-    )
+
     parser.add_argument(
         "--db",
         type=str,
         default="olist.duckdb",
         metavar="FILENAME",
         help="Database filename inside the /data folder. (default: olist.duckdb)",
+    )
+    parser.add_argument(
+        "--chart_limit",
+        type=int,
+        default=50,
+        help="Number of products to show in the chart. (default: 50)",
     )
     parser.add_argument(
         "--payment_installment",
@@ -203,11 +204,16 @@ def get_connection(db_filename: str = "olist.duckdb") -> duckdb.DuckDBPyConnecti
 
 def run_validation(conn: duckdb.DuckDBPyConnection) -> None:
     """Run all data quality checks before the main analysis."""
-    logger.info("running validation")
-    check_tables_exist(conn)
-    check_columns_not_null(conn)
-    check_date_range(conn)
-    check_row_counts(conn)
+    logger.info("Running validation...")
+    try:
+        check_tables_exist(conn)
+        check_columns_not_null(conn)
+        check_date_range(conn)
+        check_row_counts(conn)
+    except RuntimeError as e:
+        logger.error(f"Validation failed:\n{e}")
+        raise SystemExit(1)
+    logger.info("Validation complete.")
 
 
 def pipeline() -> None:
