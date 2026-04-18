@@ -2,7 +2,8 @@ import logging
 from datetime import datetime
 
 import duckdb
-from queries import data_path, read_sql
+
+from .queries import data_path, read_sql
 
 data_set = data_path(
     "olist.duckdb"
