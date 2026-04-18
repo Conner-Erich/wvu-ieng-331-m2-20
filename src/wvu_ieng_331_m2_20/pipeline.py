@@ -5,14 +5,15 @@ import altair as alt
 import duckdb
 import polars as pl
 from loguru import logger
-from queries import (
+
+from .queries import (
     DB_PATH,
     get_payment_information,
     get_price_shipping,
     get_product_reviews,
     get_seller_consumer_location,
 )
-from validation import (
+from .validation import (
     check_columns_not_null,
     check_date_range,
     check_row_counts,
