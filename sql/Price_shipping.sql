@@ -7,10 +7,11 @@ select
   op.payment_value,
   oi.freight_value,
   oi.price,
+  p.product_id,
     case
   when price_per_density <= 1 then 'cheap'
   when price_per_density >1 and price_per_density <= 10 then 'moderate'
-  when price_per_density < 10 then 'expensive'
+  when price_per_density > 10 then 'expensive'
   else 'error'
   end as shipping_price_rating
 from
