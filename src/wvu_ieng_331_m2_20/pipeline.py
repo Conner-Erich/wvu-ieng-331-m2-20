@@ -222,7 +222,7 @@ def pipeline() -> None:
 
     args = parse_args()
 
-    conn = get_connection()
+    conn = get_connection(args.db)
     ensure_output_dir()
 
     run_validation(conn)
