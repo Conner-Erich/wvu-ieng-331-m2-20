@@ -245,6 +245,6 @@ def pipeline() -> None:
     conn.close()
     logger.info("Pipeline complete. All outputs written.")
 
-
+main = pipeline
 if __name__ == "__main__":
     pipeline()
